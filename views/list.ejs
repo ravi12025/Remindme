@@ -1,0 +1,32 @@
+<%- include("header.ejs")  -%>
+ 
+    <div class="box" id="heading" style="color:white"> <h1><%= kindofdate %></h1> </div>
+
+    <div class="box">
+
+        <!--<% for(var i=0;i<newlistitems.length;i++){ %>
+        <div class="item" id="it">
+            <input type="checkbox" >
+            <p> <%= newlistitems[i].itemname %></p> 
+        </div>
+        <% } %> -->
+        <% newlistitems.forEach(function(items){ %>
+        <form action="/delete" method="POST">
+            <div class="item" id="it">
+                <input type="checkbox" name="deleteitem" value= "<%= items._id %>" onChange="this.form.submit()">
+                <p> <%= items.itemname %></p> 
+            </div>
+            <input type="hidden" name="listname" value="<%=kindofdate%>" ></input>
+        </form>
+            <% }) %>
+        
+        <form class="item" action="/" method="POST">
+            <input type="text" name="additems" placeholder="             New Item">
+            <button type="submit" name= 'list' value = "<%=kindofdate%>">Add-items</button>
+        </form>
+
+    </div>
+   
+</div> 
+
+<%- include("footer.ejs")  -%>
